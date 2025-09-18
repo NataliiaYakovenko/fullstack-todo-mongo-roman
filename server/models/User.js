@@ -1,0 +1,45 @@
+const mongoose = require("mongoose");
+
+const { Schema } = mongoose;
+
+const userSchema = new Schema({
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  birthday: {
+    type: Date,
+    validate: {
+      validator: (value) => value < new Date(),
+    },
+
+    // validate: {
+    //   validator: (value) => {
+    //     if (value < new Date()) {
+    //       return true;
+    //     } else {
+    //       return false;
+    //     }
+    //   },
+    // },
+  },
+  birthday: {
+    type: String,
+    required: true,
+    validate: {
+      validator: (value) =>
+        /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/.test(value),
+    },
+  },
+  passwordHash: {
+    type: String,
+    required: true,
+  },
+});
+
+const User = mongoose.model("User", userSchema);
+module.exports = User;
