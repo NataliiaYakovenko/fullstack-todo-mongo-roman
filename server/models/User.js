@@ -27,7 +27,7 @@ const userSchema = new Schema({
     //   },
     // },
   },
-  birthday: {
+  email: {
     type: String,
     required: true,
     validate: {
