@@ -2,9 +2,9 @@ POST http://localhost:5000/api/users/registration
 Content-Type: application/json
 
 {
-    "firstName": "Ted",
-    "lastName": "Tedovich",
-    "birthday": "1999-09-23",
-    "email": "ted@gmail.com",
-    "passwordHash": "Ukraina24"
+    "firstName": "Rem",
+    "lastName": "Removich",
+    "birthday": "1999-07-25",
+    "email": "rem@gmail.com",
+    "passwordHash": "Ukraina25"
 }
