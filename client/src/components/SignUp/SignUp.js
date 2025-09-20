@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import { format } from "date-fns";
 
-const SignUp = () => {
+const SignUp = (props) => {
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -12,7 +12,7 @@ const SignUp = () => {
   };
 
   const onSubmit = (values, actions) => {
-    console.log(values);
+    props.sendData(values);
     actions.resetForm();
   };
 
@@ -35,6 +35,7 @@ const SignUp = () => {
               type="password"
               placeholder="your password"
             />
+            <button type="submit">SEND FORM</button>
           </Form>
         )}
       </Formik>
