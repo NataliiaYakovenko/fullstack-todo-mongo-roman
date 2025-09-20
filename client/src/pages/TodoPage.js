@@ -2,9 +2,9 @@ import React from 'react';
 
 const TodoPage = () => {
     return (
-        <div>
-            
-        </div>
+        <h1>
+            Todo page
+        </h1>
     );
 }
 
