@@ -2,9 +2,9 @@ POST http://localhost:5000/api/users/sign-up
 Content-Type: application/json
 
 {
-    "firstName": "Rem",
-    "lastName": "Removich",
-    "birthday": "1999-07-25",
-    "email": "rem@gmail.com",
-    "passwordHash": "Ukraina25"
+    "firstName": "Nataliia",
+    "lastName": "Yakovenko",
+    "birthday": "1983-07-25",
+    "email": "nata@gmail.com",
+    "password": "Natali658"
 }

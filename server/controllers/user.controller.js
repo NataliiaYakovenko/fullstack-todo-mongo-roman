@@ -1,17 +1,40 @@
 const { User } = require("../models");
+const bcrypt = require("bcrypt");
 
 module.exports.registrationUser = async (req, res, next) => {
   try {
-    const { body } = req;
+    const { body, passwordHash } = req;
 
-    const createdUser = await User.create(body);
+    const createdUser = await User.create({ ...body, passwordHash });
     if (!createdUser) {
       return res.status(400).send("Something was wrong");
     }
+
     return res.status(201).send({ data: createdUser });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports.loginUser = async (req, res, next) => {};
+module.exports.loginUser = async (req, res, next) => {
+  try {
+    const { body } = req;
+
+    const foundUser = await User.findOne({
+      email: body.email,
+    });
+
+    if (foundUser) {
+      const result = await bcrypt.compare(
+        body.password,
+        foundUser.passwordHash
+      );
+      if (!result) {
+        return next(new Error());
+      }
+      return res.status(200).send("loged in");
+    }
+  } catch (error) {
+    next(error);
+  }
+};
