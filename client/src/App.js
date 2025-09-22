@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import TodoPage from "./pages/TodoPage";
+import styles from "./App.module.css"
 
 function App() {
    const [user, setUser] = useState(null);
-
-
-
-
 
   return (
     <BrowserRouter>

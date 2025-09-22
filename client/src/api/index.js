@@ -1,5 +1,4 @@
 import CONSTANTS from "../constants";
-//import axios from "axios";
 
 export const registerUser = async (data) => {
   const response = await fetch(`${CONSTANTS.API_BASE}/users/sign-up`, {
@@ -10,26 +9,23 @@ export const registerUser = async (data) => {
     body: JSON.stringify(data),
   });
   if (response.status === 400) {
-    const result = await response.json();
-    return Promise.reject(result.err)
-    // console.log(result);
+    const error = await response.json();
+    return Promise.reject(error);
   }
   return response.json();
 };
 
-// export const registerUser = async (data) => {
-//   try {
-//     const response = await axios.post(
-//       `${CONSTANTS.API_BASE}/users/sign-up`,
-//       data,
-//       {
-//         headers: {
-//           "Content-Type":"application/json",
-//         },
-//       }
-//     );
-//     return response.data;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+export const logiUser = async (data) => {
+  const response = await fetch(`${CONSTANTS.API_BASE}/users/sign-in`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  if (response.status === 400) {
+    const error = await response.json();
+    return Promise.reject(error);
+  }
+  return response.json();
+};

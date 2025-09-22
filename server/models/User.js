@@ -16,16 +16,6 @@ const userSchema = new Schema({
     validate: {
       validator: (value) => value < new Date(),
     },
-
-    // validate: {
-    //   validator: (value) => {
-    //     if (value < new Date()) {
-    //       return true;
-    //     } else {
-    //       return false;
-    //     }
-    //   },
-    // },
   },
   email: {
     type: String,
