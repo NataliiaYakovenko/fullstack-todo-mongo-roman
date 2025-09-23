@@ -1,0 +1,19 @@
+.statusDone {
+  color: green;
+}
+
+.statusProcess {
+  color: blue;
+}
+
+.statusFailed {
+  color: red;
+}
+
+.liContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 3px;
+  margin: 3px;
+}

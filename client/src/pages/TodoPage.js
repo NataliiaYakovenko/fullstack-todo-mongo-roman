@@ -14,13 +14,9 @@ const TodoPage = (props) => {
     }
 
     getTasks(props.user._id)
-      .then(result => console.log(result))
-      .catch(error => {
-        console.error(error);
-      });
+      .then(result => setTodos(result.data))
+      .catch(error => console.error(error));
   }, []);
-
-
 
   return (
     <>
