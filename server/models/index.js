@@ -7,5 +7,5 @@ mongoose.connect(DB).catch((err) => {
   console.log(`Connect fallen : ${err.messge}`);
 });
 
-module.exports = { User };
-module.exports={Task}
+module.exports = { User,Task };
+

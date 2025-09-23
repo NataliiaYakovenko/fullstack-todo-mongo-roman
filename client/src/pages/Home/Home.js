@@ -5,11 +5,10 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 
 const Home = ({ sendUser }) => {
-  const [state, setState] = useState(true); //true-> SignUp, false -> SignIn
+  const [state, setState] = useState(false); //true-> SignUp, false -> SignIn
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
-
 
   const buttonHandler = () => {
     setState((state) => !state);
@@ -20,7 +19,7 @@ const Home = ({ sendUser }) => {
       try {
         const result = await callback(values);
         navigate("/tasks");
-        sendUser(result);
+        sendUser(result.data);
       } catch (error) {
         setError(error.message || JSON.stringify(error));
       }
@@ -28,6 +27,7 @@ const Home = ({ sendUser }) => {
 
     sendData();
   };
+
 
 
   return (
@@ -43,11 +43,8 @@ const Home = ({ sendUser }) => {
           ) : (
             <SignIn sendData={getData} />
           )}
-      
-          {error && (
-               
-            <div className={styles.errorContainer}>{error}</div>
-          )}
+
+          {error && <div className={styles.errorContainer}>{error}</div>}
         </main>
       </>
     </div>

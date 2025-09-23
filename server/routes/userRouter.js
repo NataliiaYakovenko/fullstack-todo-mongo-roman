@@ -1,6 +1,6 @@
 const Router = require("express");
 const userController = require("../controllers/user.controller");
-const { hashPassword } = require("../middlewares/hashPassword");
+const {hashPassword}= require('../middlewares/hashPassword')
 
 const userRouter = Router();
 

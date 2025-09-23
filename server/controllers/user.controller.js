@@ -4,9 +4,12 @@ const NotFoundError = require("../errors/NotFound");
 
 module.exports.registrationUser = async (req, res, next) => {
   try {
-    const { body, passwordHash } = req;
+    const { body } = req;
 
-    const createdUser = await User.create({ ...body, passwordHash });
+    const createdUser = await User.create({
+      ...body,
+      passwordHash: req.passwordHash,
+    });
     if (!createdUser) {
       return res.status(400).send("Something was wrong");
     }
@@ -16,6 +19,21 @@ module.exports.registrationUser = async (req, res, next) => {
     next(error);
   }
 };
+
+// module.exports.registrationUser = async (req, res, next) => {
+//   try {
+//     const { body, passwordHash } = req;
+
+//     const createdUser = await User.create({ ...body, passwordHash });
+//     if (!createdUser) {
+//       return res.status(400).send("Something was wrong");
+//     }
+
+//     return res.status(201).send({ data: createdUser });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 module.exports.loginUser = async (req, res, next) => {
   try {
