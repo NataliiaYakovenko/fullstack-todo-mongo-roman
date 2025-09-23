@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
-import { logiUser } from "../../api";
+import { logiUser } from "../../api/userApi";
 
 const SignIn = (props) => {
   const initialValues = {

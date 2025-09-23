@@ -1,0 +1,9 @@
+POST http://localhost:5000/api/tasks
+Content-Type: application/json
+
+{
+    "authorId": "68d13e145c9bca6b33f54059",
+    "body":"To work fallstack developer",
+    "deadline":"2025-11-30",
+    "status":"process"
+}
