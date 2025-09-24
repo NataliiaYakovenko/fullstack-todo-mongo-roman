@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const promissifyJWTSign = promisify(jwt.sign);
 const promissifyJWTVerify = promisify(jwt.verify);
 
-const EXPIRES_TIME = 100; //якщо вказувати числом, то це в секундах
+const EXPIRES_TIME = '1h'; // 1 година дії токена
 
 const secretWord = "Euro-2024";
 
