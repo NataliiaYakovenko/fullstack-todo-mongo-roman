@@ -18,6 +18,9 @@ const Home = ({ sendUser }) => {
     const sendData = async () => {
       try {
         const result = await callback(values);
+
+        localStorage.setItem("token", result.tokens.token);
+
         navigate("/tasks");
         sendUser(result.data);
       } catch (error) {
@@ -27,8 +30,6 @@ const Home = ({ sendUser }) => {
 
     sendData();
   };
-
-
 
   return (
     <div className={styles.container}>
