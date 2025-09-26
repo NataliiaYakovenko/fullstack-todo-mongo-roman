@@ -3,7 +3,7 @@ const { Task } = require("../models");
 module.exports.getAllTasksUser = async (req, res, next) => {
   try {
     const {
-      params: { userId },
+      tokenPayload: { userId },
     } = req;
 
     const userTasks = await Task.find({
@@ -17,9 +17,12 @@ module.exports.getAllTasksUser = async (req, res, next) => {
 
 module.exports.createTask = async (req, res, next) => {
   try {
-    const { body } = req;
+    const {
+      body,
+      tokenPayload: { userId },
+    } = req;
 
-    const createdUserTask = await Task.create(body);
+    const createdUserTask = await Task.create({ ...body, authorId: userId });
 
     if (!createdUserTask) {
       return res.status(400).send("Task is not created");

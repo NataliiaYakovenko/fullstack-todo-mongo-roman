@@ -1,7 +1,7 @@
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
 const NotFoundError = require("../errors/NotFound");
-const { createToken, verifyToken } = require("../services/createSession");
+const { createToken } = require("../services/createSession");
 
 module.exports.registrationUser = async (req, res, next) => {
   try {
@@ -75,16 +75,12 @@ module.exports.loginUser = async (req, res, next) => {
 
 module.exports.checkToken = async (req, res, next) => {
   try {
-    const {
-      params: { token },
-    } = req;
+    const {tokenPayload:{userId}} = req;
 
-    const payload = await verifyToken(token);
     const foundUser = await User.findOne({
-      _id: payload.userId,
-    });
-
-    return res.status(200).send({ data: foundUser });
+      _id: userId
+    })
+    return res.status(200).send({data:foundUser})
   } catch (error) {
     next(error);
   }

@@ -1,9 +1,9 @@
 POST http://localhost:5000/api/tasks
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQxM2UxNDVjOWJjYTZiMzNmNTQwNTkiLCJlbWFpbCI6InRhbmlAZ21haWwuY29tIiwiaWF0IjoxNzU4ODg5NTgyLCJleHAiOjE3NTg4OTMxODJ9.2Rccpup86NYi3yMno33C1U_mbYElUmwHm1h8Q9fhnLE
 
 {
-    "authorId": "68d13e145c9bca6b33f54059",
-    "body":"Earn much money",
+    "body":"To buy a car",
     "deadline":"2025-11-30",
     "status":"process"
 }

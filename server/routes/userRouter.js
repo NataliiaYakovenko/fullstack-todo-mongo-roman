@@ -1,6 +1,7 @@
 const Router = require("express");
 const userController = require("../controllers/user.controller");
 const { hashPassword } = require("../middlewares/hashPassword");
+const{checkToken} = require('../middlewares/checkToken')
 
 const userRouter = Router();
 
@@ -10,7 +11,7 @@ userRouter.post("/sign-up", hashPassword, userController.registrationUser);
 //POST http://localhost:5000/api/users/sign-in
 userRouter.post("/sign-in", userController.loginUser);
 
-//GET http://localhost:5000/api/users/:token
-userRouter.get("/:token", userController.checkToken);
+//GET http://localhost:5000/api/users/
+userRouter.get("/",checkToken, userController.checkToken);
 
 module.exports = userRouter;
