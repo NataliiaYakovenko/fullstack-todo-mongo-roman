@@ -13,8 +13,8 @@ module.exports.registrationUser = async (req, res, next) => {
     });
 
     const token = await createToken({
-      userId: foundUser._id,
-      email: foundUser.email,
+      userId: createdUser._id,
+      email: createdUser.email,
     });
 
     if (!createdUser) {
