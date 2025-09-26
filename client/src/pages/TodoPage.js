@@ -36,7 +36,6 @@ const TodoPage = (props) => {
 
   const getNewTask = (data) => {
     createTask({
-      authorId: props.user._id,
       status: "new",
       ...data,
     })
