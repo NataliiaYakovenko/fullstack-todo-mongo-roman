@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import TodoPage from "./pages/TodoPage";
 import styles from "./App.module.css";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<Home sendUser={setUser} />} />
         <Route
           path="/tasks"
-          element={<TodoPage user={user} sendUser={setUser} />}
+          element={<Dashboard user={user} sendUser={setUser} />}
         />
       </Routes>
     </BrowserRouter>

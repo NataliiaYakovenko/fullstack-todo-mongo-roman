@@ -1,38 +1,17 @@
 import React, { useState, useEffect } from "react";
 import TodoList from "../components/TodoList/TodoList";
-import { useNavigate } from "react-router-dom";
 import { getTasks, createTask } from "../api/taskApi";
 import TodoForm from "../components/TodoForm/TodoForm";
-import { authUser } from "../api/userApi";
+
 
 const TodoPage = (props) => {
   const [todos, setTodos] = useState([]);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      //робимо запит на отрмання user
-      authUser(token)
-        .then((userData) => {
-          props.sendUser(userData.data);
-        })
-        .catch((error) => {
-          return navigate("/");
-        });
-    } else {
-      //перенаправляємось на аутентифіукацію
-      return navigate("/");
-    }
-
-    if (props.user?._id) {
-      // <-- перевірка перед викликом
-      getTasks(props.user._id)
-        .then((result) => setTodos(result.data))
-        .catch(console.error);
-    }
-  }, [props.user]);
+    getTasks()
+      .then((result) => setTodos(result.data))
+      .catch(console.error);
+  }, []);
 
   const getNewTask = (data) => {
     createTask({
