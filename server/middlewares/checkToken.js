@@ -1,4 +1,4 @@
-const { verifyToken } = require("../services/createSession");
+const { verifyAccesToken } = require("../services/createSession");
 
 
 module.exports.checkToken = async (req, res, next) => {
@@ -8,7 +8,7 @@ module.exports.checkToken = async (req, res, next) => {
     } = req;
     const [, token] = authorization.split(" ");
 
-    const payload = await verifyToken(token)
+    const payload = await verifyAccesToken(token)
 
     req.tokenPayload = payload;
 

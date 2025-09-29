@@ -1,17 +1,27 @@
 const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
+const {
+  refreshSecretWord,
+  REFRESH_EXPIRES_TIME,
+  accesSecretWord,
+  ACCES_EXPIRES_TIME,
+} = require("../configs/constants");
 
 const promissifyJWTSign = promisify(jwt.sign);
 const promissifyJWTVerify = promisify(jwt.verify);
 
-const EXPIRES_TIME = '1h'; // 1 година дії токена
-
-const secretWord = "Euro-2024";
-
-module.exports.createToken = async ({ userId, email }) =>
-  await promissifyJWTSign({ userId, email }, secretWord, {
-    expiresIn: EXPIRES_TIME,
+module.exports.createAccesToken = async ({ userId, email }) =>
+  await promissifyJWTSign({ userId, email }, accesSecretWord, {
+    expiresIn: ACCES_EXPIRES_TIME,
   });
 
-module.exports.verifyToken = async (token) =>
-  await promissifyJWTVerify(token, secretWord);
+module.exports.verifyAccesToken = async (token) =>
+  await promissifyJWTVerify(token, accesSecretWord);
+
+module.exports.creatRefreshToken = async ({ userId, email }) =>
+  await promissifyJWTSign({ userId, email }, refreshSecretWord, {
+    expiresIn: REFRESH_EXPIRES_TIME,
+  });
+
+module.exports.verifyRefreshToken = async (token) =>
+  await promissifyJWTVerify(token, refreshSecretWord);

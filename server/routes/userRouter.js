@@ -14,4 +14,7 @@ userRouter.post("/sign-in", userController.loginUser);
 //GET http://localhost:5000/api/users/
 userRouter.get("/", checkToken, userController.checkAuth);
 
+//POST http://localhost:5000/api/users/refresh
+userRouter.post("/refresh", userController.refreshSession);
+
 module.exports = userRouter;
