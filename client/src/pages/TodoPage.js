@@ -4,7 +4,7 @@ import { getTasks, createTask } from "../api/taskApi";
 import TodoForm from "../components/TodoForm/TodoForm";
 
 
-const TodoPage = (props) => {
+const TodoPage = () => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
