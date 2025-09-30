@@ -1,13 +1,11 @@
 import React from "react";
 import TodoItem from "../TodoItem/TodoItem";
 
-
-
 const TodoList = (props) => {
   return (
     <ol>
       {props.todos.map((td, idx) => (
-        <TodoItem key={idx} item={td} />
+        <TodoItem key={idx} item={td} delCallback={props.delCallback} />
       ))}
     </ol>
   );

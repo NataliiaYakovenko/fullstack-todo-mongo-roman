@@ -3,7 +3,7 @@ import styles from "./TodoItem.module.css";
 
 const TodoItem = (props) => {
   const {
-    item: { body, deadline, status },
+    item: {_id, body, deadline, status },
   } = props;
 
   return (
@@ -11,6 +11,7 @@ const TodoItem = (props) => {
       <span>{body}</span>
       <span>{new Date(deadline).toISOString()}</span>
       <span>{status}</span>
+      <button onClick={()=>props.delCallback(_id)}>DELETE</button>
     </li>
   );
 };

@@ -1,5 +1,4 @@
 import CONSTANTS from "../constants";
-import history from "../BrowserHistory";
 import { refreshSession } from "./userApi";
 
 export const getTasks = async () => {
@@ -18,9 +17,6 @@ export const getTasks = async () => {
   }
 
   if (response.status === 403) {
-    // const error = await response.json();
-    // history.push("/");
-    // return Promise.reject(error);
     await refreshSession();
     return await getTasks();
   }
@@ -44,11 +40,30 @@ export const createTask = async (data) => {
   }
 
   if (response.status === 403) {
-    // const error = await response.json();
-    // history.push("/");
-    // return Promise.reject(error);
     await refreshSession();
     return await createTask(data);
+  }
+  return response.json();
+};
+
+
+export const deleteTask = async (taskId) => {
+  const accesToken = localStorage.getItem("accesToken");
+
+  const response = await fetch(`${CONSTANTS.API_BASE}/tasks/${taskId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${accesToken}`,
+    },
+  });
+  if (response.status === 400) {
+    const error = await response.json();
+    return Promise.reject(error);
+  }
+
+  if (response.status === 403) {
+    await refreshSession();
+    return await deleteTask();
   }
   return response.json();
 };
