@@ -91,6 +91,8 @@ module.exports.loginUser = async (req, res, next) => {
   }
 };
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.checkAuth = async (req, res, next) => {
   try {
     const {
