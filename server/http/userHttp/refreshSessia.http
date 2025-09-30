@@ -2,5 +2,5 @@ POST http://localhost:5000/api/users/refresh
 Content-Type: application/json
 
 {
-   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ2NTgwMTZlYTBlNDEyMGU5ZGMwOWUiLCJlbWFpbCI6InJvbGxAZ21haWwuY29tIiwiaWF0IjoxNzU5MTU2NDAwLCJleHAiOjE3NTkxNTY0NjB9.D6PyIVnheVUkc380IcnNCL6tixoZsQ39m7rVmSbKszo"
+   "refreshToken": "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ2NTgwMTZlYTBlNDEyMGU5ZGMwOWUiLCJlbWFpbCI6InJvbGxAZ21haWwuY29tIiwiaWF0IjoxNzU5MjE3Njc4LCJleHAiOjE3NTkyMTc3Mzh9.N0F20idmCMiPIhPgLSxZ4Ibj6XmX_cktQrbtsm5e9GE"
 }

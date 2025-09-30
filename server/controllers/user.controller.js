@@ -75,6 +75,11 @@ module.exports.loginUser = async (req, res, next) => {
         email: foundUser.email,
       });
 
+      await RefreshToken.create({
+        token: refreshToken,
+        userId: foundUser._id,
+      });
+
       return res
         .status(200)
         .send({ data: foundUser, tokens: { accesToken, refreshToken } });
@@ -119,7 +124,7 @@ module.exports.refreshSession = async (req, res, next) => {
   try {
     // Виконуєтьс логіка оновлення session
     if (verifyResult) {
-      const user = await User.find({ _id: verifyResult.userId });
+      const user = await User.findOne({ _id: verifyResult.userId });
 
       const oldRefreshTokemFromDb = await RefreshToken.findOne({
         $and: [{ token: refreshToken }, { userId: user._id }],
