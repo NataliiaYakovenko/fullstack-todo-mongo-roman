@@ -19,7 +19,7 @@ const Home = ({ sendUser }) => {
       try {
         const result = await callback(values);
 
-        localStorage.setItem("token", result.tokens.token);
+        //localStorage.setItem("token", result.tokens.token);
 
         navigate("/tasks");
         sendUser(result.data);
