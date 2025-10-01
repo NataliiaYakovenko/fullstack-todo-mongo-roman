@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
-import { logiUser } from "../../api/userApi";
+import { loginUser } from "../../api/axiosApi";
 
 const SignIn = (props) => {
   const initialValues = {
@@ -10,7 +10,7 @@ const SignIn = (props) => {
 
   const onSubmit = (values, actions) => {
     props.sendData({
-      callback: logiUser,
+      callback: loginUser,
       values,
     });
     actions.resetForm();

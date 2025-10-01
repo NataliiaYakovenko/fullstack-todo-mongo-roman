@@ -17,12 +17,12 @@ const Home = ({ sendUser }) => {
   const getData = ({ callback, values }) => {
     const sendData = async () => {
       try {
-        const result = await callback(values);
+        const {data:{data}} = await callback(values);
 
         //localStorage.setItem("token", result.tokens.token);
 
         navigate("/tasks");
-        sendUser(result.data);
+        sendUser(data);
       } catch (error) {
         setError(error.message || JSON.stringify(error));
       }

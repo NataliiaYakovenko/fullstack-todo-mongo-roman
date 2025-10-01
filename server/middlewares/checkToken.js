@@ -1,4 +1,5 @@
 const { verifyAccesToken } = require("../services/createSession");
+const RefreshTokenError = require ('../errors/RefreshTokenError')
 
 
 module.exports.checkToken = async (req, res, next) => {
@@ -6,6 +7,11 @@ module.exports.checkToken = async (req, res, next) => {
     const {
       headers: { authorization },
     } = req;
+
+  if(!authorization){
+  throw new RefreshTokenError('Need authentication')
+  }
+
     const [, token] = authorization.split(" ");
 
     const payload = await verifyAccesToken(token)
