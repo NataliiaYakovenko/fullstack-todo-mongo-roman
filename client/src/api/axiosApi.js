@@ -1,5 +1,5 @@
 import axios from "axios";
-import CONSTANTS, { baseURL } from "../constants";
+import CONSTANTS from "../constants";
 import history from "../BrowserHistory";
 
 const httpClient = axios.create({

@@ -7,7 +7,7 @@ import {
 import Home from "./pages/Home/Home";
 import TodoPage from "./pages/TodoPage";
 import history from "./BrowserHistory";
-import { authUser } from "./api/userApi";
+//import { authUser } from "./api/userApi";
 
 function App() {
   const [user, setUser] = useState(null);
