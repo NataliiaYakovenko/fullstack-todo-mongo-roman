@@ -1,49 +1,44 @@
 import React, { useReducer } from "react";
+import { connect } from "react-redux";
+import { incrementAction, decrementAction } from "../../actions/actionCreater";
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "COUNTER_PLUS": {
-      return {
-        counter: state.counter + 1,
-      };
-    }
-    case "COUNTER_MINUS": {
-      return {
-        counter: state.counter - 1,
-      };
-    }
-    default:
-      return state;
-  }
-};
+const Counter = (props) => {
+  // const increment = () => {
+  //   props.dispatch(createActionIncrement());
+  // };
 
-const Counter = () => {
-  const [state, dispatch] = useReducer(reducer, {
-    counter: 0,
-  });
+  // const decrement = () => {
+  //   props.dispatch(createActionDecrement());
+  // };
 
-  const increment = () => {
-    const action = {
-      type: "COUNTER_PLUS",
-    };
-    dispatch(action);
-  };
-
-  const decrement = () => {
-    const action = {
-      type: "COUNTER_MINUS",
-    };
-    dispatch(action);
-  };
+  console.log(props);
 
   return (
     <div>
       <h1>Counter</h1>
-      <button onClick={increment}>+</button>
-      {state.counter}
-      <button onClick={decrement}>-</button>
+      <button onClick={props.incremenet}>+</button>
+      {props.counter}
+      <button onClick={props.decrement}>-</button>
     </div>
   );
 };
 
-export default Counter;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     increment: () => dispatch(incrementAction()),
+//     decrement: () => dispatch(decrementAction()),
+//   };
+// };
+
+const mapDispatchToProps = {
+  incremenet: incrementAction,
+  decrement: decrementAction,
+};
+
+const WrapperCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+export default WrapperCounter;
