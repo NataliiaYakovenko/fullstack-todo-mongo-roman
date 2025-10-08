@@ -20,3 +20,9 @@ export const stepChangeAction = (value) => {
     },
   };
 };
+
+export const toggleThemeActions = ()=>{
+   return({
+    type: ACTION_TYPES.TOGGLE_THEME
+   })
+}
