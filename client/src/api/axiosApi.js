@@ -6,6 +6,13 @@ const httpClient = axios.create({
   baseURL: CONSTANTS.API_BASE,
 });
 
+export const exampleAPI = async (counter) => {
+  const { data } = await axios.post("http://localhost:5000/example/counter", {
+    counter,
+  });
+  return data;
+};
+
 export const registerUser = async (userData) => {
   return await httpClient.post("/users/sign-up", userData);
 };
@@ -61,7 +68,7 @@ httpClient.interceptors.response.use(
     if (error.response.atatus === 403 && localStorage.getItem("refreshToken")) {
       await refreshUser();
 
-    await httpClient(error.config);
+      await httpClient(error.config);
     }
     if (error.response.status === 401) {
       history.push("/");

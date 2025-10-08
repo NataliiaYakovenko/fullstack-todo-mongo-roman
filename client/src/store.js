@@ -1,7 +1,13 @@
-import { legacy_createStore as createStore } from "redux";
+import { legacy_createStore as createStore, applyMiddleware } from "redux";
+import redaxSagaMiddleware from "redux-saga";
 import reducer from "./reducer";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "./sagas";
 
+const sagaMiddleware = createSagaMiddleware();
+const enhancer = applyMiddleware(sagaMiddleware);
 
-const store = createStore(reducer);
+const store = createStore(reducer, enhancer);
+sagaMiddleware.run(rootSaga);
 
 export default store;

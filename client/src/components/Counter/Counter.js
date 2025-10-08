@@ -4,6 +4,7 @@ import {
   incrementAction,
   decrementAction,
   stepChangeAction,
+  requestCounterFetching,
 } from "../../actions/actionCreater";
 
 const Counter = (props) => {
@@ -11,6 +12,9 @@ const Counter = (props) => {
     props.changeStep(Number(value));
   };
 
+  const onClickHandler = () => {
+    props.requestFetching(props.counter);
+  };
 
   return (
     <div>
@@ -25,6 +29,8 @@ const Counter = (props) => {
       />
       <button onClick={props.incremenet}>+</button>
       <button onClick={props.decrement}>-</button>
+
+      <button onClick={onClickHandler}>Send counter to Backend</button>
     </div>
   );
 };
@@ -39,6 +45,7 @@ const mapStateToProps = (state) => {
 //     increment: () => dispatch(incrementAction()),
 //     decrement: () => dispatch(decrementAction()),
 //     changeStep:(value)=> dispatch(stepChangeAction())
+//     requestFetching:()=>dispatch(requestCounterFetching)
 //   };
 // };
 
@@ -46,6 +53,7 @@ const mapDispatchToProps = {
   incremenet: incrementAction,
   decrement: decrementAction,
   changeStep: stepChangeAction,
+  requestFetching: requestCounterFetching,
 };
 
 const WrapperCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
