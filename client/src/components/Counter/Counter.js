@@ -33,7 +33,11 @@ const Counter = (props) => {
       />
       <button onClick={props.incremenet}>+</button>
       <button onClick={props.decrement}>-</button>
-      <button onClick={toggleTheme}>Toggle theme</button>
+      <button onClick={toggleTheme}>
+        {props.theme.isLightMode
+          ? "Switch to Dark Mode"
+          : "Switch to Light Mode"}
+      </button>
     </div>
   );
 };
