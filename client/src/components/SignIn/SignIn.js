@@ -1,6 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Formik, Form, Field } from "formik";
-import { loginUser } from "../../api/axiosApi";
+import { loginUserRequest } from "../../actions/actionCreater";
 
 const SignIn = (props) => {
   const initialValues = {
@@ -9,10 +10,7 @@ const SignIn = (props) => {
   };
 
   const onSubmit = (values, actions) => {
-    props.sendData({
-      callback: loginUser,
-      values,
-    });
+    props.loginUserRequest(values);
     actions.resetForm();
   };
 
@@ -38,4 +36,8 @@ const SignIn = (props) => {
   );
 };
 
-export default SignIn;
+const mapDispatchToProps = {
+  loginUserRequest,
+};
+
+export default connect(null, mapDispatchToProps)(SignIn);

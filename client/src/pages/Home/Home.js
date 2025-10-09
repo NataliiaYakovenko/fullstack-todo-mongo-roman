@@ -1,34 +1,15 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import SignUp from "../../components/SignUp/SignUp";
 import SignIn from "../../components/SignIn/SignIn";
 import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 
-const Home = ({ sendUser }) => {
+const Home = (props) => {
   const [state, setState] = useState(false); //true-> SignUp, false -> SignIn
-  const [error, setError] = useState(null);
-
-  const navigate = useNavigate();
 
   const buttonHandler = () => {
     setState((state) => !state);
-  };
-
-  const getData = ({ callback, values }) => {
-    const sendData = async () => {
-      try {
-        const {data:{data}} = await callback(values);
-
-        //localStorage.setItem("token", result.tokens.token);
-
-        navigate("/tasks");
-        sendUser(data);
-      } catch (error) {
-        setError(error.message || JSON.stringify(error));
-      }
-    };
-
-    sendData();
   };
 
   return (
@@ -39,17 +20,16 @@ const Home = ({ sendUser }) => {
         </header>
 
         <main className={styles.formWrapper}>
-          {state ? (
-            <SignUp sendData={getData} />
-          ) : (
-            <SignIn sendData={getData} />
-          )}
+          {state ? <SignUp /> : <SignIn />}
 
-          {error && <div className={styles.errorContainer}>{error}</div>}
+          {props.error && (
+            <div className={styles.errorContainer}>{props.error.message}</div>
+          )}
         </main>
       </>
     </div>
   );
 };
+const mapStateToProps = ({ error }) => ({ error });
 
-export default Home;
+export default connect(mapStateToProps)(Home);
