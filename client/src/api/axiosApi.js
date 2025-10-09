@@ -36,11 +36,11 @@ export const deleteTask = async (taskId) => {
 
 httpClient.interceptors.request.use(
   (config) => {
-    const accesToken = localStorage.getItem("accesToken");
-    if (accesToken) {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
       config.headers = {
         ...config.headers,
-        Authorization: `Bearer ${accesToken}`,
+        Authorization: `Bearer ${accessToken}`,
       };
     }
     return config;
@@ -54,7 +54,7 @@ httpClient.interceptors.response.use(
       const {
         data: { tokens },
       } = response;
-      localStorage.setItem("accesToken", tokens.accesToken);
+      localStorage.setItem("accessToken", tokens.accessToken);
       localStorage.setItem("refreshToken", tokens.refreshToken);
     }
     return response;

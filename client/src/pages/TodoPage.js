@@ -32,7 +32,7 @@ const TodoPage = (props) => {
     <>
       <h1>Todo List</h1>
       <TodoForm sendData={getNewTask} />
-      <TodoList todos={props.state.tasks} delCallback={delTask} />
+      <TodoList todos={props.tasks} delCallback={delTask} />
     </>
   );
 };

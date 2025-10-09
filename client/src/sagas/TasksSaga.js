@@ -10,17 +10,21 @@ import {
 } from "../actions/actionCreater";
 
 export function* getTaskSaga() {
+  
   try {
     const {
-      data: { data },
+      data:{data},
     } = yield getTasks();
     yield put(getTasksSuccess(data));
+    console.log("Fetched tasks:", data);
   } catch (error) {
     yield put(getTasksError(error));
   }
 }
 
 export function* createTaskSaga(action) {
+  console.log("Creating task:", action.payload);
+
   try {
     const {
       data: { data },
