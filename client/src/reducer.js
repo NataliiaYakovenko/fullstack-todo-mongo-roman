@@ -1,3 +1,4 @@
+import { act } from "react";
 import ACTION_TYPES from "./actions/actionTypes";
 
 const initialState = {
@@ -8,7 +9,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(state);
+  console.log(state, 500, action.type);
 
   switch (action.type) {
     case ACTION_TYPES.LOGIN_USER_ERROR:
@@ -38,21 +39,35 @@ const reducer = (state = initialState, action) => {
 
     case ACTION_TYPES.LOGIN_USER_SUCCESS:
     case ACTION_TYPES.REGISTER_USER_SUCCESS:
-    case ACTION_TYPES.AUTH_USER_REQUEST: {
+    case ACTION_TYPES.AUTH_USER_SUCCESS: {
+      console.log(555);
       const { payload } = action;
       return {
         ...state,
         user: payload,
         isLoading: false,
+        error: null,
       };
     }
 
     case ACTION_TYPES.GET_TASKS_SUCCESS: {
-      const { payload: newTask } = action;
+      const { payload } = action;
       return {
         ...state,
-        tasks: [...state.tasks, ...newTask],
+        tasks: payload,
         isLoading: false,
+        error: null,
+      };
+    }
+
+    case ACTION_TYPES.CREATE_TASK_SUCCESS: {
+      const { payload: newTask } = action;
+
+      return {
+        ...state,
+        tasks: [...state.tasks, newTask],
+        isLoading: false,
+        error: null,
       };
     }
 
@@ -66,6 +81,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         tasks: filtredTasks,
         isLoading: false,
+        error: null,
       };
 
     case ACTION_TYPES.LOG_OUT_REQUEST:

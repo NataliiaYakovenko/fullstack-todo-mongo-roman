@@ -19,7 +19,7 @@ export function* loginSaga(action) {
     yield put(loginUserSuccess(data));
     history.push("/tasks");
   } catch (error) {
-    yield put(loginUserError(error));
+    yield put(loginUserError(error.response.data.error));
   }
 }
 
@@ -32,15 +32,17 @@ export function* registerSaga(action) {
     yield put(registerUserSuccess(data));
     history.push("/tasks");
   } catch (error) {
-    yield put(registerUserError(error));
+    yield put(registerUserError(error.response.data.error));
   }
 }
 
 export function* authSaga() {
+  console.log(3000);
   try {
     const {
       data: { data },
     } = yield authUser();
+    console.log(data, 333);
     yield put(authUserSuccess(data));
     history.push("/users");
   } catch (error) {
@@ -49,6 +51,6 @@ export function* authSaga() {
 }
 
 export function* logOutSaga() {
-  yield logOut()
-  history.push('/')
+  yield logOut();
+  history.push("/");
 }

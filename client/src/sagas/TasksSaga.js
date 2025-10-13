@@ -10,15 +10,14 @@ import {
 } from "../actions/actionCreater";
 
 export function* getTaskSaga() {
-  
   try {
     const {
-      data:{data},
+      data: { data },
     } = yield getTasks();
     yield put(getTasksSuccess(data));
     console.log("Fetched tasks:", data);
   } catch (error) {
-    yield put(getTasksError(error));
+    yield put(getTasksError(error.response.data.error));
   }
 }
 
@@ -31,7 +30,7 @@ export function* createTaskSaga(action) {
     } = yield createTask(action.payload);
     yield put(createTaskSuccess(data));
   } catch (error) {
-    yield put(createTaskError(error));
+    yield put(createTaskError(error.response.data.error));
   }
 }
 
@@ -42,6 +41,6 @@ export function* deleteTaskSaga(action) {
     } = yield deleteTask(action.payload);
     yield put(deleteTaskSuccess(data));
   } catch (error) {
-    yield put(deleteTaskError(error));
+    yield put(deleteTaskError(error.response.data.error));
   }
 }

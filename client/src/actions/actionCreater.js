@@ -7,6 +7,7 @@ export const logOutRequest = () => {
 };
 
 export const authUserRequest = () => {
+  console.log(2000)
   return {
     type: ACTION_TYPES.AUTH_USER_REQUEST,
   };

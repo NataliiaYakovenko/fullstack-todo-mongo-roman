@@ -12,10 +12,10 @@ import { useEffect } from "react";
 
 function App(props) {
   useEffect(() => {
-  if(!props.user){
-authUserRequest()
-  }
-
+    console.log(props.user, 444);
+    if (!props.user) {
+      authUserRequest();
+    }
   }, []);
   return (
     <HistoryRouter history={history}>

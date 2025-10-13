@@ -58,21 +58,23 @@ httpClient.interceptors.response.use(
       const {
         data: { tokens },
       } = response;
-      console.log(tokens, 111);
-      localStorage.setItem("accessToken", tokens.accessToken);
       localStorage.setItem("refreshToken", tokens.refreshToken);
+      localStorage.setItem("accessToken", tokens.accessToken);
     }
     return response;
   },
   async (error) => {
-    if (error.response.atatus === 403 && localStorage.getItem("refreshToken")) {
+    if (error.response.status=== 403 && localStorage.getItem("refreshToken")) {
       await refreshUser();
 
       await httpClient(error.config);
-    }
-    if (error.response.status === 401) {
+    } else if (error.response.status === 401) {
+      logOut();
       history.push("/");
+    } else {
+      return Promise.reject(error);
     }
     return Promise.reject(error);
   }
 );
+

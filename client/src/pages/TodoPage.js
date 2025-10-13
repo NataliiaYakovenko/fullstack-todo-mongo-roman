@@ -12,9 +12,13 @@ import TodoForm from "../components/TodoForm/TodoForm";
 const TodoPage = (props) => {
   const [todos, setTodos] = useState([]);
 
+  console.log(props.user, 222);
   useEffect(() => {
-    props.getTasksRequest();
-  }, []);
+    if (props.user) {
+      console.log(111);
+      props.getTasksRequest();
+    }
+  }, [props.user]);
 
   const getNewTask = (data) => {
     props.createTaskRequest({
@@ -30,7 +34,7 @@ const TodoPage = (props) => {
   const delTask = (id) => {
     props.deleteTaskRequest(id);
   };
-console.log(props.tasks)
+  console.log(props.tasks);
   return (
     <>
       <button onClick={logOutHandler}>Log out</button>
@@ -41,7 +45,7 @@ console.log(props.tasks)
   );
 };
 
-const mapStateToProps = ({ tasks }) => ({ tasks });
+const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = {
   getTasksRequest,
