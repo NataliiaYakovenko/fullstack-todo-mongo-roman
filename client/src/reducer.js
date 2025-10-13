@@ -15,7 +15,8 @@ const reducer = (state = initialState, action) => {
     case ACTION_TYPES.REGISTER_USER_ERROR:
     case ACTION_TYPES.GET_TASKS_ERROR:
     case ACTION_TYPES.CREATE_TASK_ERROR:
-    case ACTION_TYPES.DELETE_TASK_ERROR: {
+    case ACTION_TYPES.DELETE_TASK_ERROR:
+    case ACTION_TYPES.AUTH_USER_ERROR: {
       const { payload } = action;
       return {
         ...state,
@@ -36,7 +37,8 @@ const reducer = (state = initialState, action) => {
     }
 
     case ACTION_TYPES.LOGIN_USER_SUCCESS:
-    case ACTION_TYPES.REGISTER_USER_SUCCESS: {
+    case ACTION_TYPES.REGISTER_USER_SUCCESS:
+    case ACTION_TYPES.AUTH_USER_REQUEST: {
       const { payload } = action;
       return {
         ...state,
@@ -49,7 +51,7 @@ const reducer = (state = initialState, action) => {
       const { payload: newTask } = action;
       return {
         ...state,
-        tasks: [...state.tasks, newTask],
+        tasks: [...state.tasks, ...newTask],
         isLoading: false,
       };
     }
@@ -64,6 +66,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         tasks: filtredTasks,
         isLoading: false,
+      };
+
+    case ACTION_TYPES.LOG_OUT_REQUEST:
+      return {
+        ...initialState,
       };
 
     default: {

@@ -3,11 +3,20 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { connect } from "react-redux";
 import Home from "./pages/Home/Home";
 import TodoPage from "./pages/TodoPage";
 import history from "./BrowserHistory";
+import { authUserRequest } from "./actions/actionCreater";
+import { useEffect } from "react";
 
-function App() {
+function App(props) {
+  useEffect(() => {
+  if(!props.user){
+authUserRequest()
+  }
+
+  }, []);
   return (
     <HistoryRouter history={history}>
       <Routes>
@@ -18,4 +27,9 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = ({ user }) => ({ user });
+const mapDispatchToProps = {
+  authUserRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

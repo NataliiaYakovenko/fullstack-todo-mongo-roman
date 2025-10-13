@@ -1,10 +1,12 @@
-import { loginUser, registerUser } from "../api/axiosApi";
+import { loginUser, registerUser, authUser, logOut } from "../api/axiosApi";
 import { put } from "redux-saga/effects";
 import {
   loginUserSuccess,
   loginUserError,
   registerUserError,
   registerUserSuccess,
+  authUserSuccess,
+  authUserError,
 } from "../actions/actionCreater";
 import history from "../BrowserHistory";
 
@@ -13,7 +15,7 @@ export function* loginSaga(action) {
     const {
       data: { data },
     } = yield loginUser(action.payload);
-
+    console.log(data);
     yield put(loginUserSuccess(data));
     history.push("/tasks");
   } catch (error) {
@@ -32,4 +34,21 @@ export function* registerSaga(action) {
   } catch (error) {
     yield put(registerUserError(error));
   }
+}
+
+export function* authSaga() {
+  try {
+    const {
+      data: { data },
+    } = yield authUser();
+    yield put(authUserSuccess(data));
+    history.push("/users");
+  } catch (error) {
+    yield put(authUserError(error));
+  }
+}
+
+export function* logOutSaga() {
+  yield logOut()
+  history.push('/')
 }

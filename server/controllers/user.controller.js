@@ -65,7 +65,7 @@ module.exports.loginUser = async (req, res, next) => {
         throw new NotFoundError("Incorrect password");
       }
 
-      const accesToken = await createAccesToken({
+      const accessToken = await createAccesToken({
         userId: foundUser._id,
         email: foundUser.email,
       });
@@ -82,7 +82,7 @@ module.exports.loginUser = async (req, res, next) => {
 
       return res
         .status(200)
-        .send({ data: foundUser, tokens: { accesToken, refreshToken } });
+        .send({ data: foundUser, tokens: { accessToken, refreshToken } });
     } else {
       throw new NotFoundError("Incorrect email");
     }
@@ -153,7 +153,7 @@ module.exports.refreshSession = async (req, res, next) => {
         });
 
         return res.status(200).send({
-          tokens: { accesToken: newAccesToken, refreshToken: newRefreshToken },
+          tokens: { accessToken: newAccesToken, refreshToken: newRefreshToken },
         });
       }
     } else {

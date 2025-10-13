@@ -6,8 +6,6 @@ const httpClient = axios.create({
   baseURL: CONSTANTS.API_BASE,
 });
 
-
-
 export const registerUser = async (userData) => {
   return await httpClient.post("/users/sign-up", userData);
 };
@@ -20,6 +18,12 @@ export const refreshUser = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
   const { data } = await httpClient.post("/users/refresh", { refreshToken });
   return data;
+};
+
+export const authUser = async () => await httpClient.get("/users");
+
+export const logOut = async () => {
+  localStorage.clear();
 };
 
 export const getTasks = async () => {
@@ -54,6 +58,7 @@ httpClient.interceptors.response.use(
       const {
         data: { tokens },
       } = response;
+      console.log(tokens, 111);
       localStorage.setItem("accessToken", tokens.accessToken);
       localStorage.setItem("refreshToken", tokens.refreshToken);
     }
