@@ -1,10 +1,14 @@
 import axios from "axios";
+import io from "socket.io-client";
 import CONSTANTS from "../constants";
 import history from "../BrowserHistory";
+import store from "../store";
 
 const httpClient = axios.create({
   baseURL: CONSTANTS.API_BASE,
 });
+
+const socket = io("ws:localhost:5000", { transports: ["websocket"] });
 
 export const registerUser = async (userData) => {
   return await httpClient.post("/users/sign-up", userData);
@@ -64,7 +68,7 @@ httpClient.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.response.status=== 403 && localStorage.getItem("refreshToken")) {
+    if (error.response.status === 403 && localStorage.getItem("refreshToken")) {
       await refreshUser();
 
       await httpClient(error.config);
@@ -77,4 +81,3 @@ httpClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
