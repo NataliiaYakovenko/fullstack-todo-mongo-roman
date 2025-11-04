@@ -11,7 +11,10 @@ const httpClient = axios.create({
 const socket = io("ws://localhost:5000", { transports: ["websocket"] });
 
 socket.on(CONSTANTS.SOCKET_EVENT_NETIFICATION, (data) => {
-  console.log(data);
+  store.dispatch({
+    type:'NOTIFICATION',
+    payload:data
+  })
 });
 
 export const registerUser = async (userData) => {

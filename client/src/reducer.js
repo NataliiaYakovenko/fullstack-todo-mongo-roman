@@ -6,6 +6,7 @@ const initialState = {
   tasks: [],
   isLoading: false,
   error: null,
+  notification: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -71,7 +72,7 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case ACTION_TYPES.DELETE_TASK_SUCCESS:
+    case ACTION_TYPES.DELETE_TASK_SUCCESS: {
       const { payload: deletedTask } = action;
       const filtredTasks = state.tasks.filter(
         (td) => td._id !== deletedTask.id
@@ -83,11 +84,21 @@ const reducer = (state = initialState, action) => {
         isLoading: false,
         error: null,
       };
+    }
 
-    case ACTION_TYPES.LOG_OUT_REQUEST:
+    case ACTION_TYPES.LOG_OUT_REQUEST: {
       return {
         ...initialState,
       };
+    }
+
+    case "NOTIFICATION": {
+      const { payload:{notification} } = action;
+      return {
+        ...state,
+        notification: notification,
+      };
+    }
 
     default: {
       return state;
