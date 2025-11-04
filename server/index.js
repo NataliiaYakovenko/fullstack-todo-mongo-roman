@@ -16,7 +16,7 @@ io.on("connect", (socket) => {
   console.log("CONNECTION");
 
   //кожні 5 секунд відправляти на клієнт якесь повідомлення
-  setTimeout(() => {
+  setInterval(() => {
     io.emit('NEW NOTIFICATION',{notification:'Something new happening'})
   }, 5000);
 

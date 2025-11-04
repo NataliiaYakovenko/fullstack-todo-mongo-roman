@@ -5,10 +5,14 @@ import history from "../BrowserHistory";
 import store from "../store";
 
 const httpClient = axios.create({
-  baseURL: CONSTANTS.API_BASE,
+  baseURL: `http://${CONSTANTS.API_BASE}`,
 });
 
-const socket = io("ws:localhost:5000", { transports: ["websocket"] });
+const socket = io("ws://localhost:5000", { transports: ["websocket"] });
+
+socket.on(CONSTANTS.SOCKET_EVENT_NETIFICATION, (data) => {
+  console.log(data);
+});
 
 export const registerUser = async (userData) => {
   return await httpClient.post("/users/sign-up", userData);

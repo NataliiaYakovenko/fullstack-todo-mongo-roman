@@ -1,7 +1,6 @@
 const CONSTANTS = {
-  API_BASE: "http://localhost:5000/api"
+  API_BASE: "localhost:5000/api",
+  SOCKET_EVENT_NETIFICATION: "NEW NOTIFICATION",
 };
 
-
-
-export default CONSTANTS
+export default CONSTANTS;
