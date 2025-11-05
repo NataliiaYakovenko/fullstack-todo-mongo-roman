@@ -1,8 +1,13 @@
 const bcrypt = require("bcrypt");
-const {SALT_ROUNDS} = require("../configs/constants");
+const { SALT_ROUNDS } = require("../configs/constants");
+const EmptyUserError = require("../errors/EmptyUserError");
 
 module.exports.hashPassword = async (req, res, next) => {
   try {
+    if (!req.body || Object.keys(req.body).length === 0) {
+      throw new EmptyUserError("User cannot be empty");
+    }
+
     const {
       body,
       body: { password },
@@ -16,5 +21,3 @@ module.exports.hashPassword = async (req, res, next) => {
     next(error);
   }
 };
-
-

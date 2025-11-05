@@ -18,7 +18,12 @@ module.exports.registrationUser = async (req, res, next) => {
       passwordHash: req.passwordHash,
     });
 
-    const token = await createAccesToken({
+    const accessToken = await createAccesToken({
+      userId: createdUser._id,
+      email: createdUser.email,
+    });
+
+    const refreshToken = await creatRefreshToken({
       userId: createdUser._id,
       email: createdUser.email,
     });
@@ -27,7 +32,9 @@ module.exports.registrationUser = async (req, res, next) => {
       return res.status(400).send("Something was wrong");
     }
 
-    return res.status(201).send({ data: createdUser, tokens: { token } });
+    return res
+      .status(201)
+      .send({ data: createdUser, tokens: { accessToken, refreshToken } });
   } catch (error) {
     next(error);
   }
@@ -90,7 +97,6 @@ module.exports.loginUser = async (req, res, next) => {
     next(error);
   }
 };
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports.checkAuth = async (req, res, next) => {
@@ -157,7 +163,7 @@ module.exports.refreshSession = async (req, res, next) => {
         });
       }
     } else {
-      throw new RefreshTokenError('Token not found')
+      throw new RefreshTokenError("Token not found");
     }
   } catch (error) {
     next(error);

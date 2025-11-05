@@ -4,8 +4,13 @@ const {
 const NotFoundError = require("./errors/NotFound");
 const { JsonWebTokenError, TokenExpiredError } = require("jsonwebtoken");
 const RefreshTokenError = require("./errors/RefreshTokenError");
+const EmptyUserError = require("./errors/EmptyUserError");
 
 module.exports.errorHandler = (err, req, res, next) => {
+  if (err instanceof EmptyUserError) {
+    return res.status(400).send({ error: err.message });
+  }
+
   if (err instanceof ValidationError) {
     return res.status(400).send({ error: err.message });
   }
@@ -26,5 +31,5 @@ module.exports.errorHandler = (err, req, res, next) => {
   }
 
   console.log(err);
-  return res.status(500).send({ err: err.message }); 
+  return res.status(500).send({ err: err.message });
 };
