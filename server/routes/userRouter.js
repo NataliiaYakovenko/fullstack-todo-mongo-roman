@@ -1,4 +1,4 @@
-const Router = require("express");
+const {Router} = require("express");
 const userController = require("../controllers/user.controller");
 const { hashPassword } = require("../middlewares/hashPassword");
 const { checkToken } = require("../middlewares/checkToken");
@@ -15,6 +15,9 @@ userRouter.post("/sign-in", userController.loginUser);
 userRouter.get("/", checkToken, userController.checkAuth);
 
 //POST http://localhost:5000/api/users/refresh
-userRouter.post("/refresh", userController.refreshSession);
+userRouter.post("/refresh", userController.createNewTokenByQRCodeAuth);
+
+//POST http://ipv4:5000/api/users/authByQRCode
+userRouter.post("/authByQRCode", userController.createNewTokenByQRCodeAuth);
 
 module.exports = userRouter;

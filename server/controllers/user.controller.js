@@ -114,22 +114,13 @@ module.exports.checkAuth = async (req, res, next) => {
   }
 };
 
-module.exports.refreshSession = async (req, res, next) => {
-  const {
-    body: { refreshToken },
-  } = req;
-
-  let verifyResult;
-
+module.exports.createNewTokenByQRCodeAuth = async (req, res, next) => {
   try {
-    //перевіряємо чт валідний refresh token
-    verifyResult = await verifyRefreshToken(refreshToken);
-  } catch (error) {
-    const newError = new RefreshTokenError("Invalid refresh token");
-    return next(newError);
-  }
+    const {
+      body: { refreshToken },
+    } = req;
+    const verifyResult = await verifyRefreshToken(refreshToken);
 
-  try {
     // Виконуєтьс логіка оновлення session
     if (verifyResult) {
       const user = await User.findOne({ _id: verifyResult.userId });
@@ -139,10 +130,6 @@ module.exports.refreshSession = async (req, res, next) => {
       });
 
       if (oldRefreshTokemFromDb) {
-        await RefreshToken.deleteOne({
-          $and: [{ token: refreshToken }, { userId: user._id }],
-        });
-
         const newAccesToken = await createAccesToken({
           userId: user._id,
           email: user.email,

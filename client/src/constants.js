@@ -1,5 +1,5 @@
 const CONSTANTS = {
-  API_BASE: "localhost:5000/api",
+  API_BASE: "192.168.43.231:5000/api",
   SOCKET_EVENT_NETIFICATION: "NEW NOTIFICATION",
 };
 

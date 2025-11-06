@@ -8,7 +8,8 @@ const httpClient = axios.create({
   baseURL: `http://${CONSTANTS.API_BASE}`,
 });
 
-const socket = io("ws://localhost:5000", { transports: ["websocket"] });
+
+const socket = io("ws://192.168.43.231:5000", { transports: ["websocket"] });
 
 socket.on(CONSTANTS.SOCKET_EVENT_NETIFICATION, (data) => {
   store.dispatch({
