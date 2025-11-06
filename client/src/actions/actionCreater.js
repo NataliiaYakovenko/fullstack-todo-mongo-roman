@@ -7,7 +7,7 @@ export const logOutRequest = () => {
 };
 
 export const authUserRequest = () => {
-  console.log(2000)
+  console.log(2000);
   return {
     type: ACTION_TYPES.AUTH_USER_REQUEST,
   };
@@ -128,5 +128,32 @@ export const deleteTaskError = (payload) => {
   return {
     type: ACTION_TYPES.DELETE_TASK_ERROR,
     payload,
+  };
+};
+
+export const authQRUserRequest = (payload) => {
+  return {
+    type: ACTION_TYPES.AUTH_QR_USER_REQUEST,
+    payload,
+  };
+};
+
+export const authQRUserSuccess = (payload) => {
+  return {
+    type: ACTION_TYPES.AUTH_QR_USER_SUCCESS,
+    payload,
+  };
+};
+
+export const authQRUserError = (payload) => {
+  return {
+    type: ACTION_TYPES.AUTH_QR_USER_ERROR,
+    payload,
+  };
+};
+
+export const emptyUserObjectRequest = () => {
+  return {
+    type: ACTION_TYPES.EMPTY_USER_OBJECT_REQUEST,
   };
 };

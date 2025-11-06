@@ -28,6 +28,11 @@ module.exports.registrationUser = async (req, res, next) => {
       email: createdUser.email,
     });
 
+      await RefreshToken.create({
+        token: refreshToken,
+        userId: createdUser._id,
+      });
+
     if (!createdUser) {
       return res.status(400).send("Something was wrong");
     }
@@ -113,6 +118,64 @@ module.exports.checkAuth = async (req, res, next) => {
     next(error);
   }
 };
+
+module.exports.refreshSession = async (req, res, next) => {
+  const {
+    body: { refreshToken },
+  } = req;
+
+  let verifyResult;
+
+  try {
+    //перевіряємо чт валідний refresh token
+    verifyResult = await verifyRefreshToken(refreshToken);
+  } catch (error) {
+    const newError = new RefreshTokenError("Invalid refresh token");
+    return next(newError);
+  }
+
+  try {
+    // Виконуєтьс логіка оновлення session
+    if (verifyResult) {
+      const user = await User.findOne({ _id: verifyResult.userId });
+
+      const oldRefreshTokemFromDb = await RefreshToken.findOne({
+        $and: [{ token: refreshToken }, { userId: user._id }],
+      });
+
+      if (oldRefreshTokemFromDb) {
+        await RefreshToken.deleteOne({
+          $and: [{ token: refreshToken }, { userId: user._id }],
+        });
+
+        const newAccesToken = await createAccesToken({
+          userId: user._id,
+          email: user.email,
+        });
+
+        const newRefreshToken = await creatRefreshToken({
+          userId: user._id,
+          email: user.email,
+        });
+
+        await RefreshToken.create({
+          token: newRefreshToken,
+          userId: user._id,
+        });
+
+        return res.status(200).send({
+          tokens: { accessToken: newAccesToken, refreshToken: newRefreshToken },
+        });
+      }
+    } else {
+      throw new RefreshTokenError('Token not found')
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 
 module.exports.createNewTokenByQRCodeAuth = async (req, res, next) => {
   try {

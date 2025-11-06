@@ -1,4 +1,4 @@
-import { act } from "react";
+import { React } from "react";
 import ACTION_TYPES from "./actions/actionTypes";
 
 const initialState = {
@@ -18,7 +18,8 @@ const reducer = (state = initialState, action) => {
     case ACTION_TYPES.GET_TASKS_ERROR:
     case ACTION_TYPES.CREATE_TASK_ERROR:
     case ACTION_TYPES.DELETE_TASK_ERROR:
-    case ACTION_TYPES.AUTH_USER_ERROR: {
+    case ACTION_TYPES.AUTH_USER_ERROR:
+    case ACTION_TYPES.AUTH_QR_USER_ERROR: {
       const { payload } = action;
       return {
         ...state,
@@ -31,7 +32,8 @@ const reducer = (state = initialState, action) => {
     case ACTION_TYPES.REGISTER_USER_REQUEST:
     case ACTION_TYPES.GET_TASKS_REQUEST:
     case ACTION_TYPES.CREATE_TASK_REQUEST:
-    case ACTION_TYPES.DELETE_TASK_REQUEST: {
+    case ACTION_TYPES.DELETE_TASK_REQUEST:
+    case ACTION_TYPES.AUTH_QR_USER_REQUEST: {
       return {
         ...state,
         isLoading: true,
@@ -40,7 +42,8 @@ const reducer = (state = initialState, action) => {
 
     case ACTION_TYPES.LOGIN_USER_SUCCESS:
     case ACTION_TYPES.REGISTER_USER_SUCCESS:
-    case ACTION_TYPES.AUTH_USER_SUCCESS: {
+    case ACTION_TYPES.AUTH_USER_SUCCESS:
+    case ACTION_TYPES.AUTH_QR_USER_SUCCESS: {
       console.log(555);
       const { payload } = action;
       return {
@@ -93,10 +96,19 @@ const reducer = (state = initialState, action) => {
     }
 
     case "NOTIFICATION": {
-      const { payload:{notification} } = action;
+      const {
+        payload: { notification },
+      } = action;
       return {
         ...state,
         notification: notification,
+      };
+    }
+
+    case ACTION_TYPES.EMPTY_USER_OBJECT_REQUEST: {
+      return {
+        ...state,
+        user: {},
       };
     }
 

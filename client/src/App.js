@@ -10,14 +10,16 @@ import history from "./BrowserHistory";
 import { authUserRequest } from "./actions/actionCreater";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import AuthByQRCode from "./AuthByQRCode/AuthByQRCode";
+import AuthByQRCode from "./pages/AuthByQRCode/AuthByQRCode";
 
 function App(props) {
   useEffect(() => {
-    console.log(props.user, 444);
-    if (!props.user) {
-      authUserRequest();
-    }
+    setTimeout(() => {
+      console.log(props.user, 444);
+      if (!props.user) {
+        authUserRequest();
+      }
+    }, 500);
   }, []);
 
   useEffect(() => {
@@ -41,7 +43,7 @@ function App(props) {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/tasks" element={<TodoPage />} />
-        <Route path="/authByQR" element={<AuthByQRCode />} />
+        <Route path="/authByQRCode" element={<AuthByQRCode />} />
       </Routes>
     </HistoryRouter>
   );
@@ -54,4 +56,3 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
-// http://localhost:3000/authByQR/?refresh=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ2NTgwMTZlYTBlNDEyMGU5ZGMwOWUiLCJlbWFpbCI6InJvbGxAZ21haWwuY29tIiwiaWF0IjoxNzYyMzczODY1LCJleHAiOjE3NjIzNzc0NjV9.FQ0aEihQyonwM0jht0dNbvbonWg6qq7Dbuh3SSgrJLo

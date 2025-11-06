@@ -8,14 +8,15 @@ const httpClient = axios.create({
   baseURL: `http://${CONSTANTS.API_BASE}`,
 });
 
-
-const socket = io("ws://192.168.43.231:5000", { transports: ["websocket"] });
+const socket = io(`ws://${CONSTANTS.IPV4_ADDRESS}:5000`, {
+  transports: ["websocket"],
+});
 
 socket.on(CONSTANTS.SOCKET_EVENT_NETIFICATION, (data) => {
   store.dispatch({
-    type:'NOTIFICATION',
-    payload:data
-  })
+    type: "NOTIFICATION",
+    payload: data,
+  });
 });
 
 export const registerUser = async (userData) => {

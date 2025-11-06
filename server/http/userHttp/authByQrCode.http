@@ -2,5 +2,5 @@ POST http://localhost:5000/api/users/authByQRCode
 Content-Type: application/json
 
 {
-  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ2NTgwMTZlYTBlNDEyMGU5ZGMwOWUiLCJlbWFpbCI6InJvbGxAZ21haWwuY29tIiwiaWF0IjoxNzYyNDE3MDIwLCJleHAiOjE3NjI0MjA2MjB9.Rf-9QlNfI14F1_qHg_AzIs0eMA0cj4qYuV8d6m1fkCY"  
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ2NTgwMTZlYTBlNDEyMGU5ZGMwOWUiLCJlbWFpbCI6InJvbGxAZ21haWwuY29tIiwiaWF0IjoxNzYyNDIyNDkzLCJleHAiOjE3NjI0MjYwOTN9.oclHn-vva2f1XvpP0XCzhN8cOT7w-_lm8XTKnIBjzIM"  
 }

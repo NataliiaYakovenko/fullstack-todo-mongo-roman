@@ -15,7 +15,7 @@ userRouter.post("/sign-in", userController.loginUser);
 userRouter.get("/", checkToken, userController.checkAuth);
 
 //POST http://localhost:5000/api/users/refresh
-userRouter.post("/refresh", userController.createNewTokenByQRCodeAuth);
+userRouter.post("/refresh", userController.refreshSession);
 
 //POST http://ipv4:5000/api/users/authByQRCode
 userRouter.post("/authByQRCode", userController.createNewTokenByQRCodeAuth);
